@@ -1,12 +1,13 @@
 CC = gcc
-DEBUG = 1
+DEBUG = 0
 
 # Flags
+UFLAGS = -Wall -pedantic -D_FORTIFY_SOURCE=2
 ifeq ($(DEBUG), 0)
-CFLAGS = -Wall -pedantic -O3 -flto -fno-builtin
+CFLAGS = $(UFLAGS) -O3 -flto -fno-builtin
 WFLAGS = -fwhole-program
 else
-CFLAGS = -Wall -pedantic -ggdb
+CFLAGS = $(UFLAGS) -ggdb
 WFLAGS =
 endif
 
@@ -17,10 +18,11 @@ PRINTF_OBJECTS = printf.o
 NUMBERS_OBJECTS = numbers.o
 WAGES_OBJECTS = wages.o
 ABSOLUTE_OBJECTS = absolute.o
-OBJECTS = $(HELLO_OBJECTS) $(BIRTHDAY_OBJECTS) $(PRINTF_OBJECTS) $(NUMBERS_OBJECTS) $(WAGES_OBJECTS) $(ABSOLUTE_OBJECTS)
+COMPLEX_OBJECTS = complex.o
+OBJECTS = $(HELLO_OBJECTS) $(BIRTHDAY_OBJECTS) $(PRINTF_OBJECTS) $(NUMBERS_OBJECTS) $(WAGES_OBJECTS) $(ABSOLUTE_OBJECTS) $(COMPLEX_OBJECTS)
 
 # Executables
-EXES = hello birthdays printf numbers wages absolute
+EXES = hello birthdays printf numbers wages absolute complex
 
 main: $(EXES)
 
@@ -41,6 +43,9 @@ wages: $(WAGES_OBJECTS)
 
 absolute: $(ABSOLUTE_OBJECTS)
 	$(CC) $(WFLAGS) $(CFLAGS) -o absolute $(ABSOLUTE_OBJECTS)
+
+complex: $(COMPLEX_OBJECTS)
+	$(CC) $(WFLAGS) $(CFLAGS) -o complex $(COMPLEX_OBJECTS)
 
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<

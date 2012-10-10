@@ -10,13 +10,12 @@ struct date
 
 struct date read_date(void)
 {
-	char eoln;
 	struct date dateIn;
 
-	scanf("%d %d %d", &dateIn.day, 
-		&dateIn.month, 
+	scanf("%d %d %d", &dateIn.day,
+		&dateIn.month,
 		&dateIn.year);
-	eoln = getchar();
+	getchar();
 
 	return dateIn;
 }
@@ -39,8 +38,10 @@ int days_in(int the_month, int the_year)
 		case 12:
 			return 31;
 		case 2:
-			return (the_year % 4 == 0  && 
+			return (the_year % 4 == 0  &&
 					the_year != 0 ? 29 : 28);
+		default:
+			return -1;
 	}
 }
 
@@ -48,16 +49,16 @@ long get_day_number(struct date toDate)
 {
 	long month_no, no_of_days = 0;
 
-	if (toDate.year > 0) 
+	if (toDate.year > 0)
 		no_of_days =
-		  (long)(toDate.year) * DAYS_PER_YEAR + 
+		  (long)(toDate.year) * DAYS_PER_YEAR +
 			(toDate.year - 1) / 4;
 
-	for (month_no = 1 ; month_no < toDate.month ; 
+	for (month_no = 1 ; month_no < toDate.month ;
 		month_no++)
-		no_of_days += 
+		no_of_days +=
 			days_in(month_no, toDate.year);
-	
+
 	return no_of_days + toDate.day;
 }
 
@@ -65,25 +66,25 @@ void write_day(int dow)
 {
 	switch (dow)
 	{
-		case 0 : 
+		case 0 :
 			puts("Sunday");
 			break;
-		case 1 : 
+		case 1 :
 			puts("Monday");
 			break;
-		case 2 : 
+		case 2 :
 			puts("Tuesday");
 			break;
-		case 3 : 
+		case 3 :
 			puts("Wednesday");
 			break;
-		case 4 : 
+		case 4 :
 			puts("Thursday");
 			break;
-		case 5 : 
+		case 5 :
 			puts("Friday");
 			break;
-		case 6 : 
+		case 6 :
 			puts("Saturday");
 			break;
 	}
