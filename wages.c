@@ -1,19 +1,25 @@
 #include <stdio.h>
+#define true 1
+#define false 0
 
 int main(int argc, char const *argv[])
 {
-	int hours;
-	double rate, wages;
+	int hours = -1;
+	double rate = 0, wages;
 
-	printf("How many (whole) hours has the employee worked? ");
-	scanf("%d", &hours);
-	getchar();
-	printf("What is the hourly rate? ");
-	scanf("%f", &rate);
-	getchar();
+	do {
+		printf("How many (whole) hours has the employee worked? ");
+		scanf("%d", &hours);
+		getchar();
+	} while (hours < 0);
+	do {
+		printf("What is the hourly rate? ");
+		scanf("%lf", &rate);
+		getchar();
+	} while (rate < 0);
 
 	wages = rate * hours;
-	printf("Total earnings £%.2f\n");
+	printf("Total earnings £%.2f\n", wages);
 
 	return 0;
 }
