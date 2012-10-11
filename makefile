@@ -2,9 +2,9 @@ CC = gcc
 DEBUG = 0
 
 # Flags
-UFLAGS = -Wall -pedantic -D_FORTIFY_SOURCE=2
+UFLAGS = -Wall -pedantic -D_FORTIFY_SOURCE=2 -Wunsafe-loop-optimizations
 ifeq ($(DEBUG), 0)
-CFLAGS = $(UFLAGS) -O3 -flto -fno-builtin
+CFLAGS = $(UFLAGS) -O2 -flto -fno-builtin -march=native
 WFLAGS = -fwhole-program
 else
 CFLAGS = $(UFLAGS) -ggdb
@@ -17,8 +17,9 @@ BIRTHDAY_OBJECTS = birthdays.o
 PRINTF_OBJECTS = printf.o
 NUMBERS_OBJECTS = numbers.o
 WAGES_OBJECTS = wages.o
-ABSOLUTE_OBJECTS = absolute.o
+ABSOLUTE_OBJECTS = absolute.o input-functions.o
 COMPLEX_OBJECTS = complex.o
+BITS_OBJECTS = bits.o
 OBJECTS = $(HELLO_OBJECTS) $(BIRTHDAY_OBJECTS) $(PRINTF_OBJECTS) $(NUMBERS_OBJECTS) $(WAGES_OBJECTS) $(ABSOLUTE_OBJECTS) $(COMPLEX_OBJECTS)
 
 # Executables
