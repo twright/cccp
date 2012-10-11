@@ -1,6 +1,5 @@
 #include <stdio.h>
-#define true 1
-#define false 0
+#include "input-functions.h"
 
 int main(int argc, char const *argv[])
 {
@@ -9,14 +8,10 @@ int main(int argc, char const *argv[])
 
 	do {
 		printf("How many (whole) hours has the employee worked? ");
-		scanf("%d", &hours);
-		getchar();
-	} while (hours < 0);
+	} while ((hours = get_int()) < 0);
 	do {
 		printf("What is the hourly rate? ");
-		scanf("%lf", &rate);
-		getchar();
-	} while (rate < 0);
+	} while ((rate = get_double()) < 0);
 
 	wages = rate * hours;
 	printf("Total earnings £%.2f\n", wages);
