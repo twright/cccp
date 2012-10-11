@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "input-functions.h"
 
 #define INT_LIMIT 255
 
