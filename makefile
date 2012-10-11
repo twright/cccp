@@ -12,7 +12,7 @@ ifeq ($(DEBUG), 0)
 CFLAGS += -O2 -flto -fno-builtin -march=native
 WFLAGS = -fwhole-program
 else
-CFLAGS += $(UFLAGS) -ggdb
+CFLAGS += -ggdb
 endif
 
 # Executables
