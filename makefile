@@ -1,56 +1,45 @@
+# Our C compiler
 CC = gcc
+
+# Are we compiling in debug mode?
 DEBUG = 0
 
-# Flags
-UFLAGS = -Wall -pedantic -D_FORTIFY_SOURCE=2 -Wunsafe-loop-optimizations
+# The standard compiler flags
+CFLAGS = -Wall -pedantic -D_FORTIFY_SOURCE=2 -Wunsafe-loop-optimizations
+
+# Add compiler flags depending on whether DEBUG is set or not
 ifeq ($(DEBUG), 0)
-CFLAGS = $(UFLAGS) -O2 -flto -fno-builtin -march=native
+CFLAGS += -O2 -flto -fno-builtin -march=native
 WFLAGS = -fwhole-program
 else
-CFLAGS = $(UFLAGS) -ggdb
-WFLAGS =
+CFLAGS += $(UFLAGS) -ggdb
 endif
 
-# Objects
-HELLO_OBJECTS = hello.o
-BIRTHDAY_OBJECTS = birthdays.o
-PRINTF_OBJECTS = printf.o
-NUMBERS_OBJECTS = numbers.o
-WAGES_OBJECTS = wages.o input-functions.o
-ABSOLUTE_OBJECTS = absolute.o input-functions.o
-COMPLEX_OBJECTS = complex.o
-BITS_OBJECTS = bits.o
-OBJECTS = $(HELLO_OBJECTS) $(BIRTHDAY_OBJECTS) $(PRINTF_OBJECTS) $(NUMBERS_OBJECTS) $(WAGES_OBJECTS) $(ABSOLUTE_OBJECTS) $(COMPLEX_OBJECTS)
-
 # Executables
-EXES = hello birthdays printf numbers wages absolute bits complex
+EXES = hello birthdays printf numbers wages absolute bits complex linked-list
+EXE_OBJS = $(addsuffix .o,$(EXES))
+
+# Headers
+LIBS = input-functions
+LIB_OBJS = $(addsuffix .o,$(basename $(LIBS)))
 
 main: $(EXES)
-
-hello: $(HELLO_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o hello $(HELLO_OBJECTS)
-
-birthdays: $(BIRTHDAY_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o birthdays $(BIRTHDAY_OBJECTS)
-
-printf: $(PRINTF_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o printf $(PRINTF_OBJECTS)
-
-numbers: $(NUMBERS_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o numbers $(NUMBERS_OBJECTS)
-
-wages: $(WAGES_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o wages $(WAGES_OBJECTS)
-
-absolute: $(ABSOLUTE_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o absolute $(ABSOLUTE_OBJECTS)
-
-complex: $(COMPLEX_OBJECTS)
-	$(CC) $(WFLAGS) $(CFLAGS) -o complex $(COMPLEX_OBJECTS)
 
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 .PHONY: clean
 clean:
-	-rm $(OBJECTS) $(EXES)
+	-rm $(EXE_OBJS) $(LIB_OBJS) $(EXES)
+
+.SECONDEXPANSION:
+
+# Add header files as dependancies of header objects
+$(LIB_OBJS): $$(patsubst %.o, %.h, $$@)
+
+# Compile all of the executable files
+$(EXES): $$@.c $$@.o
+	$(CC) $(WFLAGS) $(CFLAGS) -o $@ $(filter %.o,$^)
+
+# All of the header file dependancies of each executable
+wages absolute: $$@.c $$@.o input-functions.o
