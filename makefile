@@ -23,7 +23,7 @@ BITS_OBJECTS = bits.o
 OBJECTS = $(HELLO_OBJECTS) $(BIRTHDAY_OBJECTS) $(PRINTF_OBJECTS) $(NUMBERS_OBJECTS) $(WAGES_OBJECTS) $(ABSOLUTE_OBJECTS) $(COMPLEX_OBJECTS)
 
 # Executables
-EXES = hello birthdays printf numbers wages absolute complex
+EXES = hello birthdays printf numbers wages absolute bits complex
 
 main: $(EXES)
 
