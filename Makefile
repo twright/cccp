@@ -1,28 +1,23 @@
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
-
 BIN = hello birthdays printf numbers wages absolute bits complex linked-list-demo
 
 .PHONY: all clean
 
 all: $(BIN)
 
-# update all object files when Makefile changes, as we might have
-# changed CFLAGS (not perfectly robust, as CFLAGS can also come from
-# the environment, but the best we can do without more infrastructure)
+# rebuild all when Makefile changes, in case CFLAGS changed
 $(OBJ): Makefile
 
 clean:
-	rm -f $(BIN) $(OBJ)
+	rm -f $(BIN) $(OBJ) deps.mk
 
-# generate prerequisites using GCC - deps.mk is included below so will
-# always be rebuilt
+# generate prerequisites using GCC
+include deps.mk
 deps.mk:
 	gcc -MM $(SRC) > deps.mk
-
-include deps.mk
 
 # specific prerequisites
 linked-list-demo: linked-list-demo.o linked-list.o
