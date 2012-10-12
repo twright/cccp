@@ -21,7 +21,7 @@ EXE_OBJS = $(addsuffix .o,$(EXES))
 
 # Headers
 LIBS = input-functions linked-list
-LIB_OBJS = $(addsuffix .o,$(basename $(LIBS)))
+LIB_OBJS = $(addsuffix .o,$(LIBS))
 
 main: $(EXES)
 
