@@ -1,6 +1,3 @@
-# Our C compiler
-CC = gcc
-
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRC = $(wildcard *.c)
@@ -13,7 +10,8 @@ BIN = hello birthdays printf numbers wages absolute bits complex linked-list-dem
 all: $(BIN)
 
 # update all object files when Makefile changes, as we might have
-# changed CFLAGS
+# changed CFLAGS (not perfectly robust, as CFLAGS can also come from
+# the environment, but the best we can do without more infrastructure)
 $(OBJ): Makefile
 
 clean:
