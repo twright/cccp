@@ -2,11 +2,11 @@
 CC = gcc
 
 # Compiler flags
-CFLAGS = -Wall -Wextra -Werror -pedantic -D_FORTIFY_SOURCE=2 -Wunsafe-loop-optimizations -funsafe-loop-optimizations -O2 -flto -fno-builtin -march=native
+CFLAGS = -Wall -Wextra -Werror -pedantic -D_FORTIFY_SOURCE=2 -O2 -flto -fno-builtin -march=native
 WHOLE_PROGRAM_FLAGS = -fwhole-program
 
 # Binaries
-BINS = hello birthdays printf numbers wages absolute bits complex linked-list-demo
+BINS = hello birthdays printf numbers wages absolute bits complex-demo linked-list-demo
 BIN_OBJS = $(addsuffix .o,$(BINS))
 
 # Headers
@@ -36,6 +36,8 @@ $(BINS): $$@.o
 	$(CC) $(WHOLE_PROGRAM_FLAGS) $(CFLAGS) -o $@ $^
 
 # All of the header file dependancies of each executable
-wages absolute: $$@.o input-functions.o
+wages absolute birthdays: $$@.o input-functions.o
+
+complex-demo: $$@.o complex.o
 
 linked-list-demo: $$@.o linked-list.o

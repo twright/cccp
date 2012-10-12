@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main(int argc, char const *argv[])
+int main()
 {
 	printf("'It was the %s of times,\n", "best");
 	printf("%ct was the %s o%x times'\n",  0111, "worst", 15);

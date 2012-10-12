@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "input-functions.h"
 
-int main(int argc, char const *argv[])
+int main()
 {
 	int hours = -1;
 	double rate = 0, wages;

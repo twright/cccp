@@ -1,4 +1,5 @@
 #define IMAGINARY_SYMBOL 'i'
+#define COMPLEX_STRING_LIMIT 255
 
 typedef struct {
 	double real, imag;

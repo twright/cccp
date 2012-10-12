@@ -1,6 +1,7 @@
 /* This program reads in a date (which must be in the 20th century - this software is NOT millenium-compliant!) and prints out the day of the week corresponding to that date */
 
 #include <stdio.h>
+#include "input-functions.h"
 #define	DAYS_PER_YEAR	365
 
 struct date
@@ -12,10 +13,9 @@ struct date read_date(void)
 {
 	struct date dateIn;
 
-	scanf("%d %d %d", &dateIn.day,
-		&dateIn.month,
-		&dateIn.year);
-	getchar();
+	dateIn.day = get_int();
+	dateIn.month = get_int();
+	dateIn.year = get_int();
 
 	return dateIn;
 }

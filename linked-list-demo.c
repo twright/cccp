@@ -6,7 +6,7 @@
 
 int main(int argc, char const *argv[])
 {
-	unsigned int i;
+	int i;
 	Link* head = NULL;
 	Link* end = head;
 	char s[MAX_PRINT_LENGTH];
