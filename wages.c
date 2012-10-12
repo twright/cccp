@@ -3,6 +3,8 @@
 
 int main(int argc, char const *argv[])
 {
+    (void)argc;
+    (void)argv;
 	int hours = -1;
 	double rate = 0, wages;
 

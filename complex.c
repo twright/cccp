@@ -11,6 +11,8 @@ void tests();
 int main(int argc, char const *argv[])
 {
 	int i;
+    (void)argc;
+    (void)argv;
 
 	for (i = 0; i <= 100000; ++i)
 		tests();

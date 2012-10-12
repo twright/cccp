@@ -12,6 +12,8 @@ unsigned int abs_val(int x)
 int main(int argc, char const *argv[])
 {
 	int n = 0;
+    (void)argc;
+    (void)argv;
 
 	n = get_int();
 

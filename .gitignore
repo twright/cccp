@@ -1,0 +1,11 @@
+*.o
+deps.mk
+hello
+birthdays
+printf
+numbers
+wages
+absolute
+bits
+complex
+linked-list-demo
