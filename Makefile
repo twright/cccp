@@ -20,6 +20,6 @@ deps.mk:
 	gcc -MM $(SRC) > deps.mk
 
 # specific prerequisites
-linked-list-demo: linked-list-demo.o linked-list.o
-wages: wages.o input-functions.o
-absolute: absolute.o input-functions.o
+linked-list-demo: linked-list.o
+wages: input-functions.o
+absolute: input-functions.o
