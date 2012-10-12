@@ -6,11 +6,11 @@ int main(void)
 
 	i = 42;
 	p = &i;
-	printf("i = %d p = 0x%x and p points to the value %d\n", i, p, *p);
+	printf("i = %d p = 0x%p and p points to the value %d\n", i, (void*)p, *p);
 	i = 0;
-	printf("i = %d p = 0x%x and p points to the value %d\n", i, p, *p);
+	printf("i = %d p = 0x%p and p points to the value %d\n", i, (void*)p, *p);
 	*p = -1;
-	printf("i = %d p = 0x%x and p points to the value %d\n", i, p, *p);
+	printf("i = %d p = 0x%p and p points to the value %d\n", i, (void*)p, *p);
 
 	return 0;
 }

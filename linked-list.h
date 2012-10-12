@@ -1,3 +1,6 @@
+#ifndef LINKED_LIST_H
+#define LINKED_LIST_H
+
 #define MAX_DIGIT_LIMIT 50
 
 typedef struct Link {
@@ -18,3 +21,5 @@ const char* list_to_str(Link*, char*, unsigned int len_s);
 double list_sum(Link*);
 
 double list_product(Link*);
+
+#endif /* LINKED_LIST_H */

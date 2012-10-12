@@ -1,43 +1,25 @@
-# C compiler
 CC = gcc
+CFLAGS = -Wall -Wextra -Werror -g
+SRC = $(wildcard *.c)
+OBJ = $(SRC:.c=.o)
+BIN = hello birthdays printf numbers wages absolute bits pointer1 complex-demo linked-list-demo
 
-# Compiler flags
-CFLAGS = -Wall -Wextra -Werror -pedantic -D_FORTIFY_SOURCE=2 -O2 -flto -fno-builtin -march=native
-WHOLE_PROGRAM_FLAGS = -fwhole-program
+.PHONY: all clean
 
-# Binaries
-BINS = hello birthdays printf numbers wages absolute bits complex-demo linked-list-demo
-BIN_OBJS = $(addsuffix .o,$(BINS))
+all: $(BIN)
 
-# Headers
-HEADERS = input-functions linked-list
-HEADER_OBJS = $(addsuffix .o,$(HEADERS))
+# rebuild all when Makefile changes, in case CFLAGS changed
+$(OBJ): Makefile
 
-.PHONY: main clean debug
-
-# Compile all binaries with standard flags
-main: $(BINS)
-
-# Compile all binaries with debugging symbols
-debug: CFLAGS += -ggdb
-debug: main
-
-# Remove all binaries
 clean:
-	-rm $(BIN_OBJS) $(HEADER_OBJS) $(BINS)
+	rm -f $(BIN) $(OBJ) deps.mk
 
-.SECONDEXPANSION:
+# generate prerequisites using GCC
+include deps.mk
+deps.mk:
+	gcc -MM $(SRC) > deps.mk
 
-# Add header files as dependancies of header objects
-$(HEADER_OBJS): $$(patsubst %.o, %.h, $$@)
-
-# Compile all of the executable files
-$(BINS): $$@.o
-	$(CC) $(WHOLE_PROGRAM_FLAGS) $(CFLAGS) -o $@ $^
-
-# All of the header file dependancies of each executable
-wages absolute birthdays: $$@.o input-functions.o
-
-complex-demo: $$@.o complex.o
-
-linked-list-demo: $$@.o linked-list.o
+# specific prerequisites
+linked-list-demo: linked-list.o
+wages absolute birthdays: input-functions.o
+complex-demo: complex.o

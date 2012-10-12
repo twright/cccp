@@ -1,3 +1,6 @@
+#ifndef COMPLEX_H
+#define COMPLEX_H
+
 #define IMAGINARY_SYMBOL 'i'
 #define COMPLEX_STRING_LIMIT 255
 
@@ -23,3 +26,5 @@ Complex complex_mul(Complex, Complex);
 Complex complex_div_scalar(Complex, double);
 
 Complex complex_div(Complex, Complex);
+
+#endif /* COMPLEX_H */
